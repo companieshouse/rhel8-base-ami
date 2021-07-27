@@ -1,1 +1,50 @@
 ---
+- hosts: rhel8-base
+  become: true
+  collections: 
+    - ch-collections.base
+  pre_tasks:
+    - name: Updating System Packages Before Ansible Run
+      yum:
+        name: '*'
+        state: latest
+    - name: Set timezone to Europe/London
+      community.general.timezone:
+        name: Europe/London
+  roles:
+    - epel
+    - ch_collections.base.pip
+    - ch_collections.base.os_package_control
+    - RHEL8-CIS
+    - cloudwatch-agent
+    - ch_collections.base.cloudwatch_agent_helper
+    - ch_collections.base.nagios_nrpe_client
+    - clamav
+  tasks: 
+    - name: update iscsi config setting
+      lineinfile: 
+        path: /etc/iscsi/iscsid.conf
+        regexp: '^node.session.timeo.replacement_timeout = 120' 
+        line: 'node.session.timeo.replacement_timeout = 5'
+        backrefs: yes
+    - name: Run multipath config tool to enable multipath and disable user friendly names
+      command: mpathconf --enable --with_multipathd y --user_friendly_names n
+      args:
+        creates: /etc/multipath.conf
+    - name: update mpath config to disable friendly names
+      lineinfile: 
+        path: /etc/multipath.conf
+        insertafter: '^defaults*'
+        line: 'user_friendly_names no'
+    - name: Make sure aws ssm agent is enabled
+      service:
+        name: amazon-ssm-agent
+        state: stopped
+        enabled: yes
+    - name: Create persistent SELinux boolean policies
+      ansible.posix.seboolean:
+        name: "{{ item }}"
+        state: yes
+        persistent: yes
+      loop: "{{ selinux_policies }}"
+        
