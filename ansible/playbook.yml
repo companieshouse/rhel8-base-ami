@@ -4,8 +4,24 @@
   collections: 
     - ch-collections.base
   pre_tasks:
+    - name: Install pre-required packages
+      package:
+        name: gnupg
+        state: present
+    - name: Copy GPG key
+      copy:
+        src: amazon-ssm-agent.gpg
+        dest: /tmp/amazon-ssm-agent.gpg
+    - name: Import GPG key
+      rpm_key:
+        key: /tmp/amazon-ssm-agent.gpg
+        state: present
+    # - name: Install rpm file
+    #   package:
+    #     name: "https://s3.{{ region| default("eu-west-2") }}.amazonaws.com/amazon-ssm-{{ region| default("eu-west-2") }}/latest/linux_amd64/amazon-ssm-agent.rpm"
+    #     state: present
     - name: Updating System Packages Before Ansible Run
-      yum:
+      package:
         name: '*'
         state: latest
     - name: Set timezone to Europe/London
@@ -47,4 +63,3 @@
         state: yes
         persistent: yes
       loop: "{{ selinux_policies }}"
-        
