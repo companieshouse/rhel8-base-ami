@@ -1,8 +1,8 @@
 ---
 - hosts: rhel8-base
   become: true
-  collections: 
-    - ch-collections.base
+  collections:
+    - ch_collections.base
   pre_tasks:
     - name: Copy GPG key
       copy:
