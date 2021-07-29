@@ -10,12 +10,13 @@ variable "ami_name_prefix" {
 
 variable "ansible_host_alias" {
   type        = string
+  default     = "rhel8-base"
   description = "The Ansible host alias"
 }
 
 variable "aws_instance_type" {
   type        = string
-  default     = "t2.small"
+  default     = "t2.medium"
   description = "The EC2 instance type used when building the AMI"
 }
 
@@ -27,7 +28,7 @@ variable "aws_region" {
 
 variable "aws_source_ami_filter_name" {
   type        = string
-  default     = "CentOS 8* x86_64*"
+  default     = "RHEL-8*"
   description = "The source AMI filter string. Any filter described by the DescribeImages API documentation is valid. If multiple images match then the latest will be used"
 }
 
