@@ -12,6 +12,7 @@
         network_mode: bridge
         provision_docker_volumes: 
           - /lib/modules:/lib/modules
+          - /sys/fs/cgroup:/sys/fs/cgroup:ro
   roles:
     - role: provision_docker
       provision_docker_inventory: "{{ inventory }}"
