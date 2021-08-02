@@ -15,7 +15,7 @@
             dest: /etc/yum.repos.d/redhat-rhui.repo
             section: codeready-builder-for-rhel-8-rhui-rpms
             option: enabled
-            value: 1
+            value: "1"
           when: repo.stat.exists
       when: (ansible_os_family == 'RedHat') and (ansible_distribution_major_version | int == 8)
     - name: Enable AWS SSM GPG
@@ -54,11 +54,11 @@
     - epel
     - ch_collections.base.pip
     - ch_collections.base.os_package_control
-    - RHEL8-CIS
+    - clamav
     - cloudwatch-agent
     - ch_collections.base.cloudwatch_agent_helper
+    - RHEL8-CIS
     - ch_collections.base.nagios_nrpe_client
-    - clamav
   tasks: 
     - name: update iscsi config setting
       lineinfile: 
