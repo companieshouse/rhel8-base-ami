@@ -36,7 +36,6 @@
             key: /tmp/amazon-ssm-agent.gpg
             fingerprint: 8108 A07A 9EBE 248E 3F1C  63F2 54F4 F56E 693E CA21
             validate_certs: no
-      
     - name: Updating System Packages Before Ansible Run
       package:
         name: '*'
@@ -44,6 +43,13 @@
     - name: Set timezone to Europe/London
       community.general.timezone:
         name: Europe/London
+    - name: Create persistent SELinux boolean policies
+      ansible.posix.seboolean:
+        name: "{{ item }}"
+        state: yes
+        persistent: yes
+      loop: "{{ selinux_policies }}"
+      when: ansible_virtualization_type != "docker"
   roles:
     - epel
     - ch_collections.base.pip
@@ -74,9 +80,3 @@
         name: amazon-ssm-agent
         state: stopped
         enabled: yes
-    - name: Create persistent SELinux boolean policies
-      ansible.posix.seboolean:
-        name: "{{ item }}"
-        state: yes
-        persistent: yes
-      loop: "{{ selinux_policies }}"
