@@ -59,6 +59,7 @@
     - ch_collections.base.cloudwatch_agent_helper
     - RHEL8-CIS
     - ch_collections.base.nagios_nrpe_client
+    - ch_collections.base.auditd
   tasks: 
     - name: update iscsi config setting
       lineinfile: 
