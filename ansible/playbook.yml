@@ -43,22 +43,17 @@
     - name: Set timezone to Europe/London
       community.general.timezone:
         name: Europe/London
-    - name: Create persistent SELinux boolean policies
-      ansible.posix.seboolean:
-        name: "{{ item }}"
-        state: yes
-        persistent: yes
-      loop: "{{ selinux_policies }}"
-      when: ansible_virtualization_type != "docker"
+
   roles:
     - epel
-    - ch_collections.base.pip
     - ch_collections.base.os_package_control
+    - ch_collections.base.pip
+    - RHEL8-CIS
     - ch_collections.base.clamav
     - cloudwatch-agent
     - ch_collections.base.cloudwatch_agent_helper
-    - RHEL8-CIS
     - ch_collections.base.nagios_nrpe_client
+    - ch_collections.base.auditd
   tasks: 
     - name: update iscsi config setting
       lineinfile: 
@@ -80,3 +75,10 @@
         name: amazon-ssm-agent
         state: stopped
         enabled: yes
+    - name: Create persistent SELinux boolean policies
+      ansible.posix.seboolean:
+        name: "{{ item }}"
+        state: yes
+        persistent: yes
+      loop: "{{ selinux_policies }}"
+      when: ansible_virtualization_type != "docker"
