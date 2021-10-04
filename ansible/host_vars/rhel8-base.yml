@@ -9,8 +9,10 @@ additional_packages:
   - https://s3.{{ region| default("eu-west-2") }}.amazonaws.com/amazon-ssm-{{ region| default("eu-west-2") }}/latest/linux_amd64/amazon-ssm-agent.rpm
   - python3-libselinux
   - python3-libsemanage
+  - python3-policycoreutils
   - screen
   - logrotate
+  - python3-pip
 
 pip_install_packages:
   - name: pip
@@ -23,7 +25,6 @@ pip_install_packages:
 clamav_mirror: http://clamav-mirror.sharedservices.aws.internal
 
 selinux_policies:
-  - antivirus_can_scan_system
   - nagios_run_sudo
 
 ## CloudWatch Agent Variables
@@ -58,6 +59,7 @@ rhel8cis_rule_3_6_3: false
 rhel8cis_rule_3_6_4: false
 rhel8cis_rule_3_6_5: false
 rhel8cis_rule_5_4_4: false
+rhel8cis_rule_5_5_5: false
 # Setup hosts.allow entries
 rhel8cis_host_allow:
   - "127.0.0.1"
