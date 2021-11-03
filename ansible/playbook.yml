@@ -6,6 +6,10 @@
   pre_tasks:
     - name: CodeReady repo check
       block:
+        - name: Show contents of repos folder
+          find:
+            paths: /etc/yum.repos.d/
+            recurse: yes
         - name: Check CodeReady repo exists
           ansible.builtin.stat:
             path: /etc/yum.repos.d/redhat-rhui.repo
