@@ -4,6 +4,10 @@
   collections:
     - ch_collections.base
   pre_tasks:
+    - name: Updating System Packages Before Ansible Run
+      package:
+        name: '*'
+        state: latest
     - name: CodeReady repo check
       block:
         - name: Check CodeReady repo exists but disabled
@@ -49,14 +53,9 @@
             key: /tmp/amazon-ssm-agent.gpg
             fingerprint: 8108 A07A 9EBE 248E 3F1C  63F2 54F4 F56E 693E CA21
             validate_certs: no
-    - name: Updating System Packages Before Ansible Run
-      package:
-        name: '*'
-        state: latest
     - name: Set timezone to Europe/London
       community.general.timezone:
         name: Europe/London
-
   roles:
     - epel
     - ch_collections.base.os_package_control
