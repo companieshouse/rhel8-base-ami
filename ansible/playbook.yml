@@ -6,21 +6,27 @@
   pre_tasks:
     - name: CodeReady repo check
       block:
-        - name: Show contents of repos folder
-          find:
-            paths: /etc/yum.repos.d/
-            recurse: yes
-        - name: Check CodeReady repo exists
+        - name: Check CodeReady repo exists but disabled
+          ansible.builtin.stat:
+            path: /etc/yum.repos.d/redhat-rhui.repo.disabled
+          register: repo-disabled
+        - name: Move redhat-rhui repo file to enabled
+          copy: 
+            src: /etc/yum.repos.d/redhat-rhui.repo.disabled
+            dest: /etc/yum.repos.d/redhat-rhui.repo
+            remote_src: True 
+          when: repo-disabled.stat.exists
+        - name: Check CodeReady repo exists and enabled
           ansible.builtin.stat:
             path: /etc/yum.repos.d/redhat-rhui.repo
-          register: repo
+          register: repo-exists
         - name: Enable CodeReady repo on RHEL8 only
           ini_file: 
             dest: /etc/yum.repos.d/redhat-rhui.repo
             section: codeready-builder-for-rhel-8-rhui-rpms
             option: enabled
             value: "1"
-          when: repo.stat.exists
+          when: repo-exists.stat.exists
       when: (ansible_os_family == 'RedHat') and (ansible_distribution_major_version | int == 8)
     - name: Enable AWS SSM GPG
       block:
