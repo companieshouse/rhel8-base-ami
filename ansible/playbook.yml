@@ -16,6 +16,9 @@
             dest: /etc/yum.repos.d/redhat-rhui.repo
             remote_src: yes
           when: repo_disabled.stat.exists
+        - name: show contents of repo folder
+          find:
+            paths: /etc/yum.repos.d/
         - name: Check CodeReady repo exists and enabled
           ansible.builtin.stat:
             path: /etc/yum.repos.d/redhat-rhui.repo
