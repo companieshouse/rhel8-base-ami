@@ -11,10 +11,10 @@
             path: /etc/yum.repos.d/redhat-rhui.repo.disabled
           register: repo_disabled
         - name: Move redhat-rhui repo file to enabled
-          copy: 
+          ansible.builtin.copy:
             src: /etc/yum.repos.d/redhat-rhui.repo.disabled
             dest: /etc/yum.repos.d/redhat-rhui.repo
-            remote_src: True 
+            remote_src: yes
           when: repo_disabled.stat.exists
         - name: Check CodeReady repo exists and enabled
           ansible.builtin.stat:
