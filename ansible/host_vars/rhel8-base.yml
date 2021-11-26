@@ -7,18 +7,20 @@ additional_packages:
   - sg3_utils
   - git
   - https://s3.{{ region| default("eu-west-2") }}.amazonaws.com/amazon-ssm-{{ region| default("eu-west-2") }}/latest/linux_amd64/amazon-ssm-agent.rpm
+  - screen
+  - logrotate
+  - python3
+  - python3-pip
   - python3-libselinux
   - python3-libsemanage
   - python3-policycoreutils
-  - screen
-  - logrotate
-  - python3-pip
+  - python39
 
 pip_install_packages:
   - name: pip
     state: latest
   - name: ansible
-    version: "2.10.6"
+    version: "2.10.7"
   - name: j2cli
     umask: "0022"
 
