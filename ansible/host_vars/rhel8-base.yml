@@ -15,6 +15,7 @@ additional_packages:
   - python3-libsemanage
   - python3-policycoreutils
   - python39
+  - python39-pip
 
 pip_install_packages:
   - name: pip
@@ -22,6 +23,8 @@ pip_install_packages:
   - name: ansible
     version: "2.10.7"
   - name: j2cli
+    umask: "0022"
+  - name: selinux
     umask: "0022"
 
 clamav_mirror: http://clamav-mirror.sharedservices.aws.internal
