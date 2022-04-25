@@ -57,7 +57,7 @@
       community.general.timezone:
         name: Europe/London
   roles:
-    - epel
+    - geerlingguy.repo-epel
     - ch_collections.base.os_package_control
     - ch_collections.base.pip
     - RHEL8-CIS
