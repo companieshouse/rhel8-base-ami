@@ -89,3 +89,12 @@
         persistent: yes
       loop: "{{ selinux_policies }}"
       when: ansible_virtualization_type != "docker"
+    - name: install chrony using yum
+      yum:
+        name: chrony
+        state: latest
+    - name: service chronyd
+      service:
+        name: chronyd
+        state: started
+        enabled: yes
