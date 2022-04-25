@@ -6,7 +6,7 @@
   vars:
     inventory:
       - name: rhel8-base
-        image: "geerlingguy/docker-centos8-ansible"
+        image: "rockylinux:8.5"
         # The network setting allows for idempotent testing.
         # without it the role creates a brand new container, with it the container is re-used.
         network_mode: bridge
