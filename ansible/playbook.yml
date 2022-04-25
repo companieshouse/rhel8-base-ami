@@ -89,3 +89,8 @@
         persistent: yes
       loop: "{{ selinux_policies }}"
       when: ansible_virtualization_type != "docker"
+    - name: service chronyd
+      service:
+        name: chronyd
+        state: started
+        enabled: yes
