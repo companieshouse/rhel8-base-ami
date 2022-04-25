@@ -16,6 +16,7 @@ additional_packages:
   - python3-policycoreutils
   - python39
   - python39-pip
+  - chrony
 
 pip_install_packages:
   - name: pip
