@@ -41,8 +41,6 @@ rhel8cis_time_synchronization: chrony
 rhel8cis_time_synchronization_servers: ["169.254.169.123"] #Default VPC source
 #Disable crypto setting changes as it causes DNF to fail installs
 rhel8cis_rule_1_11: false
-#Failing on RedHat
-rhel8cis_rule_1_2_2: false
 #Disable rsyslog/syslog-ng, using cloudwatch
 rhel8cis_rule_4_2_3: false
 rhel8cis_rule_4_2_1_1: false
