@@ -60,6 +60,7 @@
     - geerlingguy.repo-epel
     - ch_collections.base.os_package_control
     - ch_collections.base.pip
+    - ch_collections.base.limit
     - RHEL8-CIS
     - ch_collections.base.clamav
     - cloudwatch-agent
