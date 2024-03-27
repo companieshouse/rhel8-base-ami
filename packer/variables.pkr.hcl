@@ -29,7 +29,7 @@ variable "aws_region" {
 
 variable "aws_source_ami_filter_name" {
   type        = string
-  default     = "RHEL-8*x86_64*"
+  default     = "RHEL-8.8.0_HVM-20240123-x86_64*"
   description = "The source AMI filter string. Any filter described by the DescribeImages API documentation is valid. If multiple images match then the latest will be used"
 }
 
