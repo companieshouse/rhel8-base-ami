@@ -97,7 +97,7 @@
     - name: Restrict Kernel log access
       block:
       - name: Copy hardening file
-        anisble.bultin.copy:
+        ansible.bultin.copy:
           src: 10-kernel-hardening.conf
           dest: /etc/sysctl.d/10-kernel-hardening.conf
           owner: root
