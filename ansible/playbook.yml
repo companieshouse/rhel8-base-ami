@@ -103,5 +103,5 @@
           owner: root
           group: root
           mode: '0600'
-      - name: Update Kernel Parametes
+      - name: Update Kernel Parameters
         command: sysctl -p
