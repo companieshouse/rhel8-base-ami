@@ -3,6 +3,7 @@
   become: true
   collections:
     - ch_collections.base
+    - ch-collections.security_banner
   pre_tasks:
     - name: Updating System Packages Before Ansible Run
       package:
@@ -66,6 +67,8 @@
     - ch_collections.base.cloudwatch_agent_helper
     - ch_collections.base.auditd
     - ch_collections.base.cron_control
+    - ch_collections.security_banner.banner
+    
   tasks: 
     - name: update iscsi config setting
       lineinfile: 
@@ -105,3 +108,4 @@
             mode: '0600'
         - name: Update Kernel Parameters
           command: sysctl -p
+
