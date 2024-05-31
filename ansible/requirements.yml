@@ -14,6 +14,6 @@ roles:
   - name: geerlingguy.repo-epel
   - src: https://github.com/ansible-lockdown/RHEL8-CIS.git
     name: RHEL8-CIS
-    version: 1.4.0
+    version: 2.0.0
   - src: https://github.com/christiangda/ansible-role-amazon-cloudwatch-agent.git
     name: cloudwatch-agent
