@@ -1,14 +1,14 @@
 ---
 collections:
   - name: https://github.com/companieshouse/ansible-collections.git#ch_collections/base
-    version: 0.1.128
+    version: 0.1.132
     type: git
   - name: community.general
     version: 4.8.0
   - name: ansible.posix
     version: 1.1.1
-  # - name: https://github.com/companieshouse/ansible-collections.git#ch_collections/security_banner
-  #   type: git
+  - name: https://github.com/companieshouse/ansible-collections.git#ch_collections/security_banner
+    type: git
 
 roles:
   - name: geerlingguy.repo-epel
