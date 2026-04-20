@@ -9,6 +9,12 @@ variable "ami_name_prefix" {
   description = "The prefix string that will be used for the name tags of the resulting AMI and snapshot(s); the version string will be appended automatically"
 }
 
+variable "ami_regions" {
+  type        = list(string)
+  default     = ["eu-west-2"]
+  description = "A list of AWS regions that the AMI will be made available in"
+}
+
 variable "ansible_host_alias" {
   type        = string
   default     = "rhel8-base"
@@ -66,6 +72,24 @@ variable "root_volume_size_gb" {
   type        = number
   default     = 20
   description = "The EC2 instance root volume size in Gibibytes (GiB)"
+}
+
+variable "root_volume_throughput" {
+  type        = number
+  default     = 125
+  description = "The EC2 instance root volume throughput (MiB/s)"
+}
+
+variable "root_volume_iops" {
+  type        = number
+  default     = 3000
+  description = "The EC2 instance root volume IOPS"
+}
+
+variable "ssh_clear_authorized_keys" {
+  type        = bool
+  default     = true
+  description = "Defines whether the authorized_keys file should be cleared, post-build"
 }
 
 variable "ssh_private_key_file" {
