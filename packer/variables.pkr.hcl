@@ -62,12 +62,6 @@ variable "force_deregister" {
   description = "Deregister an existing AMI if one with the same name already exists"
 }
 
-variable "kms_key_id" {
-  type        = string
-  default     = null
-  description = "KMS key ID, arn or alias to use for root volume encryption in the main region. If encrypt_boot is true and this is left null, the AWS default key is used"
-}
-
 variable "playbook_file_path" {
   type        = string
   default     = "../ansible/playbook.yml"
