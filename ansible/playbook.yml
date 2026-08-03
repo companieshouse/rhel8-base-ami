@@ -75,20 +75,35 @@
         regexp: '^node.session.timeo.replacement_timeout = 120' 
         line: 'node.session.timeo.replacement_timeout = 5'
         backrefs: yes
+        
     - name: Run multipath config tool to enable multipath and disable user friendly names
       command: mpathconf --enable --with_multipathd y --user_friendly_names n
       args:
         creates: /etc/multipath.conf
+        
     - name: Make sure aws ssm agent is enabled
       service:
         name: amazon-ssm-agent
         state: stopped
         enabled: yes
+        
     - name: service chronyd
       service:
         name: chronyd
         state: started
         enabled: yes
+        
+    - name: Disable firewalld
+      ansible.builtin.service:
+        name: firewalld
+        state: stopped
+        enabled: false
+        masked: yes
+
+    - name: Daemon reload
+      ansible.builtin.service:
+        daemon_reload: true
+        
     - name: Restrict Kernel log access
       block:
         - name: Copy kernel hardening file

@@ -54,6 +54,7 @@ rhel8cis_rule_1_4_2: false
 rhel8cis_rule_1_6_1_1: false
 rhel8cis_rule_4_1_3: false
 #Disable Firewall Tasks, we manage this in app deploy
+rhel8cis_rule_3_4: false
 rhel8cis_rule_3_6_1: false
 rhel8cis_rule_3_6_2: false
 rhel8cis_rule_3_6_3: false
