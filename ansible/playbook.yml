@@ -94,14 +94,14 @@
         enabled: yes
         
     - name: Disable firewalld
-      ansible.builtin.systemd_service:
+      ansible.builtin.service:
         name: firewalld
         state: stopped
         enabled: false
         masked: yes
 
     - name: Daemon reload
-      ansible.builtin.systemd_service:
+      ansible.builtin.service:
         daemon_reload: true
         
     - name: Restrict Kernel log access
